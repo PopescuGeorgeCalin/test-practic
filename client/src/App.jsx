@@ -1,28 +1,28 @@
 import React from 'react';
-import './App.css';
+import Breadcrumbs from '@material-ui/core/Breadcrumbs';
+import Container from '@material-ui/core/Container';
+import Link from '@material-ui/core/Link';
 
-function App() {
+import Routes from './routes';
+
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <p>
-          Edit
-          {' '}
-          <code>src/App.js</code>
-          {' '}
-          and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Container maxWidth="lg">
+      <Breadcrumbs aria-label="breadcrumb">
+        <Link color="inherit" href="/">
+          Root
+        </Link>
+        <Link color="inherit" href="/form">
+          Form
+        </Link>
+        <Link color="inherit" href="/login">
+          Login
+        </Link>
+        <Link color="inherit" href="/logout">
+          Logout
+        </Link>
+      </Breadcrumbs>
+      <Routes />
+    </Container>
   );
 }
-
-export default App;

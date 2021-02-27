@@ -1,6 +1,5 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Container from '@material-ui/core/Container';
 
 import { createStore, compose, applyMiddleware } from 'redux';
 import { Provider } from 'react-redux';
@@ -8,8 +7,8 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Routes from './routes';
 import reducer from './store/reducers';
+import App from './App';
 
 const composeEnhances = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -22,9 +21,7 @@ store.subscribe(() => console.log('State changed: ', store.getState()));
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <Container maxWidth="lg">
-        <Routes />
-      </Container>
+      <App />
     </Provider>
   </React.StrictMode>,
   document.getElementById('root'),

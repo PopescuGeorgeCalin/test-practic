@@ -9,7 +9,7 @@ const Logout = (props) => {
     setTimeout(() => { props.history.push('/'); }, 500);
   };
   return (
-    <Button variant="contained" color="primary" onClick={onClick}>
+    <Button variant="contained" color="secondary" onClick={onClick}>
       Logout
     </Button>
   );
