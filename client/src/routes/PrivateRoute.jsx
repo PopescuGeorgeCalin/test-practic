@@ -1,12 +1,11 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
 
-const isAuthenticated = () => !!localStorage.getItem('is_logged_in');
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
+const PrivateRoute = ({ component: Component, is_logged_in, ...rest }) => (
   <Route
     {...rest}
-    render={(props) => (isAuthenticated() ? (
+    render={(props) => (is_logged_in ? (
       <Component {...props} />
     ) : (
       <Redirect
@@ -19,4 +18,8 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
   />
 );
 
-export default PrivateRoute;
+const mapStateToProps = ({ is_logged_in }) => ({
+  is_logged_in,
+});
+
+export default connect(mapStateToProps, null)(PrivateRoute);

@@ -27,5 +27,6 @@ module.exports = {
     'operator-linebreak': ['error', 'after'],
     'jsx-a11y/label-has-associated-control': 'off',
     'react/prop-types': 'off',
+    camelcase: 'off',
   },
 };
