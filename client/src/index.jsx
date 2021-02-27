@@ -1,12 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Container from '@material-ui/core/Container';
+
 import './index.css';
 import reportWebVitals from './reportWebVitals';
 import Routes from './routes';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Routes />
+    <Container maxWidth="lg">
+      <Routes />
+    </Container>
   </React.StrictMode>,
   document.getElementById('root'),
 );

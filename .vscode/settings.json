@@ -1,9 +1,8 @@
 {
-
-"files.exclude": {
-	"**/node_modules": true, // this excludes all folders 
-							// named "node_modules" from 
-							// the explore tree
-}
-    
+  "files.exclude": {
+    "**/node_modules": true // this excludes all folders
+    // named "node_modules" from
+    // the explore tree
+  },
+  "editor.tabSize": 2
 }
