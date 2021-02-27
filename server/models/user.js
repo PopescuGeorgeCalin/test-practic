@@ -12,7 +12,6 @@ class User {
         console.log("error: ", err);
         cb(err, null);
       } else {
-        console.log(res.insertId);
         cb(null, res.insertId);
       }
     });

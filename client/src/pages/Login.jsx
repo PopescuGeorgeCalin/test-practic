@@ -1,13 +1,17 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
 
-import { storeChangeLogged } from '../store/actions';
+import server from '../server';
 
 const Login = (props) => {
   const onClick = () => {
-    props.login();
-    setTimeout(() => { props.history.push('/form'); }, 200);
+    server.post('/login')
+      .then((response) => {
+        localStorage.setItem('is_logged_in', true);
+        localStorage.setItem('token', response.data.token);
+        setTimeout(() => { props.history.push('/form'); }, 200);
+      })
+      .catch((err) => console.log(err));
   };
   return (
     <Button variant="contained" color="primary" onClick={onClick}>
@@ -16,8 +20,4 @@ const Login = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  login: () => dispatch(storeChangeLogged(true)),
-});
-
-export default connect(null, mapDispatchToProps)(Login);
+export default Login;

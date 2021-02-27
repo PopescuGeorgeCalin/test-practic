@@ -2,7 +2,7 @@ import express from 'express'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 
-import userRoutes from './routes/user'
+import { userRouter, authRouter } from './routes'
 
 // create express app
 const app = express();
@@ -19,7 +19,8 @@ app.get("/", (req, res) => {
   res.send("Hello World");
 });
 
-app.use('/api/users', userRoutes)
+app.use('/api/login', authRouter)
+app.use('/api/users', userRouter)
 
 // listen for requests
 app.listen(port, () => {

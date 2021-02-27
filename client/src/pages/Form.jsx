@@ -63,9 +63,11 @@ const Form = (props) => {
     });
 
     if (validEmail && (validYob)) {
-      server.post('/users', user)
-        .then((resp) => {
-          console.log(resp.data);
+      server.post(
+        '/users', user,
+        { headers: { 'x-access-token': localStorage.getItem('token') } },
+      )
+        .then(() => {
           props.history.push('/');
         }).catch((err) => {
           console.log(err);

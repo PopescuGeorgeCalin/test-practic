@@ -1,12 +1,11 @@
 import React from 'react';
 import Button from '@material-ui/core/Button';
-import { connect } from 'react-redux';
-import { storeChangeLogged } from '../store/actions';
 
 const Logout = (props) => {
   const onClick = () => {
-    props.logout();
-    setTimeout(() => { props.history.push('/'); }, 500);
+    localStorage.setItem('is_logged_in', false);
+    localStorage.removeItem('token');
+    setTimeout(() => { props.history.push('/'); }, 200);
   };
   return (
     <Button variant="contained" color="secondary" onClick={onClick}>
@@ -15,8 +14,4 @@ const Logout = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  logout: () => dispatch(storeChangeLogged(false)),
-});
-
-export default connect(null, mapDispatchToProps)(Logout);
+export default Logout;
