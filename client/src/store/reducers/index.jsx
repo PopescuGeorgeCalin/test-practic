@@ -2,7 +2,7 @@ import actionTypes from '../actionTypes';
 import { updateObject } from '../utility';
 
 const initialState = {
-  is_logged_in: localStorage.getItem('is_logged_in') === true,
+  is_logged_in: localStorage.getItem('is_logged_in') === 'true',
   data: JSON.parse(localStorage.getItem('data') ?? '[]'),
 };
 
