@@ -1,8 +1,6 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { DataGrid } from '@material-ui/data-grid';
-import { connect } from 'react-redux';
-
-import { uuid } from 'uuidv4';
+import server from '../server';
 
 const columns = [
   {
@@ -13,24 +11,35 @@ const columns = [
   },
 ];
 
-const Root = ({ data }) => (data.length === 0 ? <h1>NO DATA FOUND</h1> : (
-  <div style={{ height: 600, width: '100%' }}>
-    <DataGrid
-      rows={data}
-      columns={columns}
-      pageSize={10}
-      sortModel={[
-        {
-          field: 'email',
-          sort: 'asc',
-        },
-      ]}
-    />
-  </div>
-));
+const Root = () => {
+  const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
-const mapStateToProps = ({ data }) => ({
-  data: data.map((user) => ({ ...user, id: uuid() })),
-});
+  useEffect(() => {
+    server.get('/users')
+      .then((response) => {
+        setUsers(response.data);
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setLoading(false));
+  }, []);
 
-export default connect(mapStateToProps, null)(Root);
+  if (loading) return null;
+
+  return users.length === 0 ? <h1>NO DATA FOUND</h1> : (
+    <div style={{ height: 600, width: '100%' }}>
+      <DataGrid
+        rows={users}
+        columns={columns}
+        pageSize={10}
+        sortModel={[
+          {
+            field: 'email',
+            sort: 'asc',
+          },
+        ]}
+      />
+    </div>
+  );
+};
+export default Root;

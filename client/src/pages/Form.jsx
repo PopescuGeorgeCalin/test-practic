@@ -3,8 +3,7 @@ import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import { Box, TextField, Button } from '@material-ui/core';
 
-import { connect } from 'react-redux';
-import { storeFormAdd } from '../store/actions';
+import server from '../server';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -64,8 +63,13 @@ const Form = (props) => {
     });
 
     if (validEmail && (validYob)) {
-      props.addUser(user);
-      props.history.push('/');
+      server.post('/users', user)
+        .then((resp) => {
+          console.log(resp.data);
+          props.history.push('/');
+        }).catch((err) => {
+          console.log(err);
+        });
     }
   };
 
@@ -98,8 +102,4 @@ const Form = (props) => {
   );
 };
 
-const mapDispatchToProps = (dispatch) => ({
-  addUser: (user) => dispatch(storeFormAdd(user)),
-});
-
-export default connect(null, mapDispatchToProps)(Form);
+export default Form;
